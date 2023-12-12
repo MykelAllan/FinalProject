@@ -80,3 +80,46 @@ To run this project locally, follow these steps:
 - This project is a simple React application featuring a homepage, shop page, and cart page. 
 - Users can explore items on the shop page, add them to the cart, and manage their cart items. 
 - The application utilizes React Router for navigation and local state for shopping cart management.
+## Features
+
+- **Homepage:** Provides a welcoming introduction to the application.
+- **Shop Page:** Displays a list of items available for purchase.
+- **Cart Page:** Allows users to view, add, and remove items from the shopping cart.
+- **Responsive Design:** Ensures a consistent and user-friendly experience across different devices.
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/MykelAllan/FinalProject.git
+    ```
+
+2. **Navigate to the project directory:**
+
+    ```bash
+    cd your-node-project
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4. **Run the development server:**
+
+    ```bash
+    npm start
+    ```
+
+    The application will be accessible at [http://localhost:3000](http://localhost:3000).
+
+## Technologies Used
+
+- **React:** Front-end library for building user interfaces.
+- **React Router:** Enables navigation within the single-page application.
+- **Node.js:** Server-side JavaScript runtime.
+- **CSS:** Stylesheets for styling the application.
