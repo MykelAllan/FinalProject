@@ -76,6 +76,7 @@ To run this project locally, follow these steps:
 
 # FrontEnd
 ## Project Overview
+Check out the live demo [here](https://frontend-lime-two-63.vercel.app/).
 
 - This project is a simple React application featuring a homepage, shop page, and cart page. 
 - Users can explore items on the shop page, add them to the cart, and manage their cart items. 
