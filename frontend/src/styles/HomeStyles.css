@@ -1,0 +1,24 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.pfp-container {
+    text-align: center;
+}
+
+.pfp {
+    width: 150px;
+    height: 150px;
+    background-color: #ddd;
+    /* You can use an actual image or color */
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.pfp-info {
+    font-size: 18px;
+    font-weight: bold;
+}

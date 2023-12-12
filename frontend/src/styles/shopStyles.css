@@ -1,0 +1,137 @@
+img {
+    width: 35px;
+    aspect-ratio: 1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+.cart-total {
+    font-size: 24px;
+    color: navy;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+}
+
+li:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.item-name {
+    flex: 1;
+    font-size: 18px;
+    color: navy;
+}
+
+.item-price {
+    font-size: 18px;
+    color: #555;
+    margin-left: 20px;
+}
+
+button {
+    background-color: navy;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #222;
+}
+
+.item-btn {
+    font-size: 16px;
+}
+
+.cart {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.cart h2 {
+    font-size: 24px;
+    color: navy;
+    margin-bottom: 20px;
+}
+
+.cart-item-list {
+    margin: 0;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.cart-item-name {
+    font-size: 18px;
+    color: navy;
+}
+
+.cart-item-price {
+    font-size: 18px;
+    color: #555;
+    margin-left: 20px;
+}
+
+.cart-item-btn {
+    font-size: 16px;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-size: 24px;
+    color: navy;
+}
+
+.empty-cart {
+    font-size: 18px;
+    color: #999;
+    text-align: center;
+}
