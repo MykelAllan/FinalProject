@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="user-info">
+            <% if (user) { %>
+                <h3>Hello, <span style="text-transform: capitalize;">
+                        <%= user.username %>!
+                    </span></h3>
+                <button><a href="/logout">Logout</a></button>
+                <% } else { %>
+                    <h3>Hello, <span>Guest!</span></h3>
+                    <button><a href="/login">Login</a></button>
+                    <% } %>
+        </div>
+        <div>
+            <h4>What would you like to do?</h4>
+            <button><a href="/tasks">GET Tasks API</a></button>
+            <button><a href="/tasks/add">Add Tasks<a></button>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>

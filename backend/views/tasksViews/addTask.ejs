@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+</head>
+
+<body>
+    <h1>Add Task</h1>
+    <form action="/tasks/add" method="post">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <br>
+    <a href="/tasks">Go back to Tasks</a>
+</body>
+
+</html>
