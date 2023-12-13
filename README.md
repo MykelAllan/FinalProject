@@ -1,20 +1,19 @@
 # FinalProject
 
 # BackEnd
-## Project Overview
-- This Node.js project serves as the backend for an application that manages tasks and user authentication. 
-- It uses Express for building the server, MongoDB for data storage, 
-- Passport for user authentication, and JWT for token-based user sessions.
 
-### Features:
+### Project Overview
+This Node.js project serves as the backend for an application that manages fruits shopping and user authentication. It uses Express for building the server, MongoDB for data storage, Passport for user authentication, and JWT for token-based user sessions.
+
+#### Features:
 
 - **User Authentication:** Utilizes Passport.js for local strategy authentication. Users can log in, register, and log out securely.
 
-- **Tasks Management:** Allows users to perform CRUD operations on tasks, including adding, updating, and deleting tasks.
+- **Fruits Shopping Management:** Allows users to perform CRUD operations on fruits, including adding, updating, and deleting fruits.
 
-- **API Endpoints:** Provides API endpoints for retrieving tasks, retrieving specific tasks by ID, and managing tasks through HTTP methods.
+- **API Endpoints:** Provides API endpoints for retrieving fruits, retrieving specific fruits by ID, and managing fruits through HTTP methods.
 
-## Installation
+### Installation
 
 To run this project locally, follow these steps:
 
@@ -48,11 +47,11 @@ To run this project locally, follow these steps:
 
 ### Tasks API Endpoints:
 
-- **GET /api/tasks:** Retrieve all tasks.
-- **GET /api/tasks/:id:** Retrieve a specific task by ID.
-- **POST /api/tasks/update/:id:** Update a task by ID.
-- **GET /api/tasks/update/:id:** Retrieve a task for updating by ID.
-- **DELETE /api/tasks/delete/:id:** Delete a task by ID.
+- **GET /api/fruits:** Retrieve all fruits.
+- **GET /api/fruits/:id:** Retrieve a specific fruit by ID.
+- **POST /api/fruits/update/:id:** Update a fruit by ID.
+- **GET /api/fruits/update/:id:** Retrieve a fruit for updating by ID.
+- **DELETE /api/fruits/delete/:id:** Delete a fruit by ID.
 
 ### Identity Management Endpoints:
 
@@ -76,7 +75,6 @@ To run this project locally, follow these steps:
 
 # FrontEnd
 ## Project Overview
-Check out the live demo [here](https://frontend-lime-two-63.vercel.app/).
 
 - This project is a simple React application featuring a homepage, shop page, and cart page. 
 - Users can explore items on the shop page, add them to the cart, and manage their cart items. 
