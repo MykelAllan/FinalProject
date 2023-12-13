@@ -1,33 +1,16 @@
-// Shop.js
-import "../../styles/shopStyles.css";
-import React from "react";
-
-import Cart from './Cart'
-
+import '../../styles/shopStyles.css'
+import React, { useState, useEffect } from "react";
+import Cart from './Cart';
+import axios from 'axios'; 
 export default function Shop({ onAddItem, cartItems, onRemoveItem, totalCost, itemCount }) {
-    const items = [
-        {
-            id: 1,
-            name: "Apple",
-            price: 10,
-            image:
-                "https://static.vecteezy.com/system/resources/previews/002/125/334/original/apple-fruit-free-vector.jpg"
-        },
-        {
-            id: 2,
-            name: "Orange",
-            price: 20,
-            image:
-                "https://static.vecteezy.com/system/resources/previews/003/789/381/original/fresh-orange-fruit-icon-vector.jpg"
-        },
-        {
-            id: 3,
-            name: "Grapes",
-            price: 30,
-            image:
-                "https://static.vecteezy.com/system/resources/previews/011/386/432/original/grapes-fruit-icon-design-template-free-vector.jpg"
-        }
-    ];
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        // Fetch items from your backend API using Axios
+        axios.get('http://localhost:3000/api/fruits/')
+            .then(response => setItems(response.data.data.fruits))
+            .catch(error => console.error('Error fetching items:', error));
+    }, []);
 
     const handleAddItem = (item) => {
         onAddItem(item);

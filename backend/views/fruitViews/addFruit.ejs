@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Fruit</title>
+</head>
+
+<body>
+    <h1>Add Fruit</h1>
+    <form action="/fruits/add" method="post">
+        <label for="fruitName">Fruit Name:</label>
+        <input type="text" id="fruitName" name="fruitName" required>
+
+        <label for="fruitPrice">Fruit Price:</label>
+        <input type="number" id="fruitPrice" name="fruitPrice" required>
+
+        <label for="fruitImage">Fruit Image URL:</label>
+        <input type="text" id="fruitImage" name="fruitImage" required>
+
+        <button type="submit">Add Fruit</button>
+    </form>
+    <br>
+    <a href="/fruits">Go back to Fruits</a>
+</body>
+
+</html>

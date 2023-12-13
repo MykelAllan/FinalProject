@@ -6,8 +6,6 @@ import {
   Route,
   Routes,
   Link,
-  useParams,
-  useNavigate
 } from "react-router-dom";
 
 //Views
@@ -84,7 +82,7 @@ export default function App() {
         <Route
           path="/shop"
           element={<Shop
-            onAddItem={addItemToCart} 
+            onAddItem={addItemToCart}
             cartItems={cartItems}
             onRemoveItem={removeItemFromCart}
             totalCost={totalCost}

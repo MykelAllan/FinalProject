@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits List</title>
+</head>
+
+<body>
+    <button><a href="/">Home</a></button>
+    <h1>Fruits</h1>
+    <div>
+        <% if (fruits.length === 0) { %>
+            <p>No fruits to show.</p>
+        <% } else { %>
+            <ul>
+                <% fruits.forEach(function(fruit) { %>
+                    <li>
+                        ID: <%= fruit.id %>, Fruit: <%= fruit.name %>, Price: <%= fruit.price %>
+
+                        <!-- Update form -->
+                        <form method="GET" action="/api/fruits/update/<%= fruit.id %>">
+                            <button type="submit">Update</button>
+                        </form>
+
+                        <!-- Delete form -->
+                        <form method="POST" action="/api/fruits/delete/<%= fruit.id %>?_method=DELETE">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+        <button><a href="/fruits/add">Add a Fruit</a></button>
+        <button><a href="/api/fruits/">GET Fruits API</a></button>
+    </div>
+</body>
+
+</html>

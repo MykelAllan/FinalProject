@@ -107,12 +107,13 @@ const userSchema = new mongoose.Schema({
 })
 const User = mongoose.model('Users', userSchema)
 
-const taskSchema = new mongoose.Schema({
+const fruitsSchema = new mongoose.Schema({
+    id: Number,
     name: String,
-    id: Number
+    price: Number,
+    image: String
 })
-const Tasks = mongoose.model('Tasks', taskSchema)
-
+const Fruits = mongoose.model('Fruits', fruitsSchema)
 
 //Routes
 
@@ -121,114 +122,123 @@ app.get('/', (req, res) => {
     res.render('home', { title: 'Final Project', user: req.user })
 })
 
-//tasks
-app.get('/tasks', ensureAuthenticated, async (req, res) => {
+//fruits
+app.get('/fruits', ensureAuthenticated, async (req, res) => {
     try {
-        const tasks = await Tasks.find();
-        res.render('tasksViews/tasks', { tasks })
+        const fruits = await Fruits.find();
+        res.render('fruitViews/fruits', { fruits })
     } catch (err) {
         console.error(err)
         res.status(500).send('Error fetching tasks from db')
     }
 })
-app.get('/tasks/add', (req, res) => {
-    res.render('tasksViews/addTask')
-})
-app.post('/tasks/add', async (req, res) => {
-    const { taskName } = req.body;
+app.get('/fruits/add', verifyToken, (req, res) => {
+    res.render('fruitViews/addFruit');
+});
+app.post('/fruits/add', async (req, res) => {
+    const { fruitName, fruitPrice, fruitImage } = req.body;
     try {
-        const maxIDTask = await Tasks.findOne().sort({ id: -1 });
-        const currentID = maxIDTask ? maxIDTask.id + 1 : 0
+        const maxIDFruit = await Fruits.findOne().sort({ id: -1 });
+        const currentID = maxIDFruit ? maxIDFruit.id + 1 : 1; // Start from 1 if there are no existing fruits
 
-        const task = new Tasks({
-            name: taskName,
-            id: currentID
+        const fruit = new Fruits({
+            id: currentID,
+            name: fruitName,
+            price: fruitPrice,
+            image: fruitImage
         });
 
-        const result = await task.save();
-        console.log("Saved successfully", result);
-        res.json({ data: { message: `Successfully added new task ${taskName}`, task: task } })
+        const result = await fruit.save();
+        const fruits = await Fruits.find();
+        res.render('fruitViews/fruits', { fruits });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error adding task to db");
-    }
-});
-app.post('/api/tasks/update/:id', async (req, res) => {
-    const taskID = parseInt(req.params.id);
-    const updatedName = req.body.updatedName;
-    try {
-        const result = await Tasks.updateOne({ id: taskID }, { $set: { name: updatedName } });
-        if (result.matchedCount > 0) {
-            const updatedTask = await Tasks.findOne({ id: taskID });
-            res.json({ data: { message: `Successfully updated task with ID ${taskID}`, task: updatedTask } })
-        } else {
-            res.status(404).json({ error: `Task with ID ${taskID} not found` });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: `Error updating task with ID ${taskID}` });
-    }
-});
-app.get('/api/tasks/update/:id', async (req, res) => {
-    const taskID = parseInt(req.params.id);
-    try {
-        const task = await Tasks.findOne({ id: taskID });
-        if (task) {
-            res.render('tasksViews/updateTask', { task });
-        } else {
-            res.status(404).send(`Task with ID ${taskID} not found`);
-        }
-    } catch {
-        res.status(500).send(`Error fetching task ID`);
-    }
-});
-app.delete('/api/tasks/delete/:id', async (req, res) => {
-    const taskId = parseInt(req.params.id);
-    try {
-        const result = await Tasks.deleteOne({ id: taskId });
-        if (result.deletedCount > 0) {
-            console.log();
-            res.json({ data: { message: `Task with ID ${taskId} deleted successfully.` } })
-        } else {
-            console.log(`Task with ID ${taskId} not found.`);
-            res.status(404).json({ error: `Task with ID ${taskId} not found` });
-        }
-    } catch (err) {
-        console.error(`Error deleting task with ID ${taskId}:`, err);
-        res.status(500).json({ error: `Error deleting task with ID ${taskId}` });
+        res.status(500).send('Error adding fruit to db');
     }
 });
 
-// TASKS API
-//get all tasks
-app.get('/api/tasks', ensureAuthenticated, async (req, res) => {
+app.post('/api/fruits/update/:id', async (req, res) => {
+    const fruitId = req.params.id;
+    const updatedName = req.body.updatedName;
+    const updatedPrice = req.body.updatedPrice;
+    const updatedImage = req.body.updatedImage;
+
     try {
-        const tasks = await Tasks.find();
-        if (tasks.length > 0) {
-            res.json({ data: {tasks: tasks} })
+        const result = await Fruits.updateOne(
+            { id: fruitId }, // Filter criteria
+            { $set: { name: updatedName, price: updatedPrice, image: updatedImage } },
+        );
+
+        if (result.matchedCount > 0) {
+            res.redirect('/fruits')
         } else {
-            res.json({ message: 'No tasks found' })
+            res.status(404).json({ error: `Fruit with ID ${fruitId} not found` });
         }
     } catch (err) {
-        console.error(err)
-        res.status(500).send('Error fetching tasks from db')
+        console.error(err);
+        res.status(500).json({ error: `Error updating fruit with ID ${fruitId}` });
     }
-})
-//get specific tasks by id
-app.get('/api/tasks/:id', async (req, res) => {
-    const taskId = parseInt(req.params.id);
+});
+app.get('/api/fruits/update/:id', async (req, res) => {
+    const fruitId = parseInt(req.params.id);
     try {
-        const task = await Tasks.findOne({ id: taskId })
-        if (task) {
-            res.json({ task: task })
+        const fruit = await Fruits.findOne({ id: fruitId });
+        if (fruit) {
+            res.render('fruitViews/updateFruit', { fruit });
         } else {
-            res.status(404).json({ error: `Task with ID ${taskId} not found` });
+            res.status(404).send(`Fruit with ID ${fruitId} not found`);
         }
     } catch (err) {
-        console.error(err)
-        res.status(500).send('Error fetching tasks from db')
+        res.status(500).send(`Error fetching fruit ID`);
     }
-})
+});
+
+app.delete('/api/fruits/delete/:id', async (req, res) => {
+    const fruitId = parseInt(req.params.id);
+    try {
+        const result = await Fruits.deleteOne({ id: fruitId });
+        if (result.deletedCount > 0) {
+            
+            res.redirect('/fruits')
+        } else {
+            res.status(404).json({ error: `Fruit with ID ${fruitId} not found` });
+        }
+    } catch (err) {
+        console.error(`Error deleting fruit with ID ${fruitId}:`, err);
+        res.status(500).json({ error: `Error deleting fruit with ID ${fruitId}` });
+    }
+});
+
+// FRUITS API
+//get all fruits
+app.get('/api/fruits', async (req, res) => {
+    try {
+        const fruits = await Fruits.find();
+        if (fruits.length > 0) {
+            res.json({ data: { fruits } });
+        } else {
+            res.json({ message: 'No fruits found' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching fruits from db');
+    }
+});
+//get specific fruit by id
+app.get('/api/fruits/:id', async (req, res) => {
+    const fruitId = req.params.id;
+    try {
+        const fruit = await Fruits.findById(fruitId);
+        if (fruit) {
+            res.json({ data: { fruit } });
+        } else {
+            res.status(404).json({ error: `Fruit with ID ${fruitId} not found` });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(`Error fetching fruit with ID ${fruitId}`);
+    }
+});
 
 
 // Identity Management
