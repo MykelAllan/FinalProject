@@ -6,7 +6,6 @@ export default function Shop({ onAddItem, cartItems, onRemoveItem, totalCost, it
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        // Fetch items from your backend API using Axios
         axios.get('http://localhost:3000/api/fruits/')
             .then(response => setItems(response.data.data.fruits))
             .catch(error => console.error('Error fetching items:', error));
